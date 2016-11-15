@@ -1,0 +1,25 @@
+{
+  "intents": [
+    {
+      "intent": "ChatOpsStatusIntent"
+    },
+    {
+      "intent": "ChatOpsStartIntent"
+    },
+    {
+      "intent": "ChatOpsStopIntent"
+    },
+    {
+      "intent": "ChatOpsRestartIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}

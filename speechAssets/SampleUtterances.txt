@@ -1,0 +1,13 @@
+ChatOpsStatusIntent the app status
+ChatOpsStatusIntent the application status
+ChatOpsStatusIntent application status
+ChatOpsStatusIntent status of the application
+ChatOpsStatusIntent the status
+ChatOpsStartIntent start the app
+ChatOpsStartIntent start the application
+ChatOpsStopIntent stop the app
+ChatOpsStopIntent stop the application
+ChatOpsRestartIntent restart the app
+ChatOpsRestartIntent restart the application
+ChatOpsRestartIntent restart
+ChatOpsRestartIntent restart application
