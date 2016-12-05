@@ -13,6 +13,19 @@
       "intent": "ChatOpsRestartIntent"
     },
     {
+      "intent": "ChatOpsLogsIntent",
+      "slots": [
+        {
+          "name": "Container",
+          "type": "LIST_OF_CONTAINER"
+        },
+        {
+          "name": "Lines",
+          "type": "AMAZON.NUMBER"
+        }
+      ]
+    },
+    {
       "intent": "AMAZON.HelpIntent"
     },
     {

@@ -11,3 +11,5 @@ ChatOpsRestartIntent restart the app
 ChatOpsRestartIntent restart the application
 ChatOpsRestartIntent restart
 ChatOpsRestartIntent restart application
+ChatOpsLogsIntent show {Container} logs
+ChatOpsLogsIntent show {Lines} lines of {Container} log

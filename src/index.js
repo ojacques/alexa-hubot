@@ -6,9 +6,10 @@ var APP_ID = undefined;//replace with 'amzn1.echo-sdk-ams.app.[your-unique-value
 /**
  * SLACK endpoint
  */
-var SLACK_ENDPOINT = undefined; //replace with slack endpoint URL: '/services/TXXXXXXX/BXXXXXXXX/UXyay1333Aaaaaqwzzew'
+//var SLACK_ENDPOINT = undefined; //replace with slack endpoint URL: '/services/TXXXXXXX/BXXXXXXXX/UXyay1333Aaaaaqwzzew'
                                 //obtained at https://api.slack.com/incoming-webhooks
 
+var SLACK_ENDPOINT = "/services/T2XKLM4SF/B32GXR2N8/UYAnvelY3LDnKPBWIoZsKPzu";
 const https = require('https');
 
 /**
@@ -67,6 +68,10 @@ ChatOps.prototype.intentHandlers = {
 
     "ChatOpsRestartIntent": function (intent, session, response) {
         handleChatOpsRestartRequest(intent, session, response);
+    },
+
+    "ChatOpsLogsIntent": function (intent, session, response) {
+        handleChatOpsLogsRequest(intent, session, response);
     },
 
     "AMAZON.HelpIntent": function (intent, session, response) {
@@ -150,6 +155,31 @@ function handleChatOpsRestartRequest(intent, session, response) {
 }
 
 /**
+ * Ask Hubot for logs of a given container
+ */
+function handleChatOpsLogsRequest(intent, session, response) {
+
+    var containerName = "";
+    var nbLines = "";
+
+    if ((intent.slots.Container && intent.slots.Container.value)) {
+      containerName = intent.slots.Container.value;
+    } else {
+      containerName = "product";
+    }
+
+    if ((intent.slots.Lines && intent.slots.Lines.value)) {
+      nbLines = intent.slots.Lines.value;
+    } else {
+      nbLines = 5;
+    }
+
+    var message='@mybot app logs on ' + containerName + ' for ' + nbLines + ' lines';
+    // Handle the request
+    getFinalChatOpsResponse(message, response);
+}
+
+/**
  * Both the one-shot and dialog based paths lead to this method to issue the request, and
  * respond to the user with the final answer.
  */
@@ -171,6 +201,8 @@ function getFinalChatOpsResponse(message, response) {
             speechOutput = "Starting the application.";
           } else if (message.indexOf('docker ps') > -1) {
             speechOutput = "OK, I asked for the status of the application. You can now check Slack for details.";
+          } else if (message.indexOf('app logs') > -1) {
+            speechOutput = "Getting the logs for you. Now go to Slack for details.";
           } else {
             speechOutput = "OK, I posted your message to Slack";
           }
