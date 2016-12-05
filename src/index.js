@@ -87,18 +87,19 @@ ChatOps.prototype.intentHandlers = {
 // -------------------------- ChatOps Domain Specific Business Logic --------------------------
 
 function handleWelcomeRequest(response) {
-  var repromptText = "How can I help?";
-  var speechOutput = "Hubot. You can ask for status, "
-                  + "start or restart the application, "
-                  + "and even stop it. "
-                  + "You can also say stop if you are done. "
-                  + repromptText;
+  // Use SSML to answer first in French, play an R2D2 mp3, then ask to switch to English.
+  var repromptText = "<s>So.</s> <s>How can I help?</s>";
+  var speechOutput = "<phoneme alphabet=\"ipa\" ph=\"bɔ̃ʒuʁ\">Bonjour</phoneme>!"
+                   + "<audio src=\"https://s3-eu-west-1.amazonaws.com/chatops.audio/R2D2.mp3\" />"
+                   + "<s><phoneme alphabet=\"ipa\" ph=\"ʒə nə paʁlə pa bjɛ̃ fʁɑ̃sɛ, "
+                   + "alɔʁ kɔ̃tinɥɔ̃ ɑ̃n- ɑ̃ɡlɛ si vu lə vule bjɛ̃\">"
+                   + "Je ne parle bien Français. Alors continuons en Anglais si vous le voulez bien.</phoneme></s>"
 
   response.ask(speechOutput, repromptText);
 }
 
 function handleHelpRequest(response) {
-    var repromptText = "How can I help?";
+    var repromptText = "So. How can I help?";
     var speechOutput = "Here are some things you can say: "
                     + "what is the application status? "
                     + "Start the application. "
