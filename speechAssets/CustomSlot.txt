@@ -1,0 +1,8 @@
+LIST_OF_CONTAINER
+cart
+catalog
+mongodb
+navigation
+product
+redis
+shop

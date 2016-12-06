@@ -93,13 +93,15 @@ ChatOps.prototype.intentHandlers = {
 
 function handleWelcomeRequest(response) {
   // Use SSML to answer first in French, play an R2D2 mp3, then ask to switch to English.
-  var repromptText = "<s>So.</s> <s>How can I help?</s>";
-  var speechOutput = "<phoneme alphabet=\"ipa\" ph=\"bɔ̃ʒuʁ\">Bonjour</phoneme>!"
-                   + "<audio src=\"https://s3-eu-west-1.amazonaws.com/chatops.audio/R2D2.mp3\" />"
-                   + "<s><phoneme alphabet=\"ipa\" ph=\"ʒə nə paʁlə pa bjɛ̃ fʁɑ̃sɛ, "
-                   + "alɔʁ kɔ̃tinɥɔ̃ ɑ̃n- ɑ̃ɡlɛ si vu lə vule bjɛ̃\">"
-                   + "Je ne parle bien Français. Alors continuons en Anglais si vous le voulez bien.</phoneme></s>"
-
+  var repromptText = "So. How can I help?";
+  var speechOutput = {
+    speech: "<speak><phoneme alphabet=\"ipa\" ph=\"bɔ̃ʒuʁ\">Bonjour</phoneme>!"
+           + "<audio src=\"https://s3-eu-west-1.amazonaws.com/chatops.audio/R2D2.mp3\" />"
+           + "<s><phoneme alphabet=\"ipa\" ph=\"ʒə nə paʁlə pa bjɛ̃ fʁɑ̃sɛ, "
+           + "alɔʁ kɔ̃tinɥɔ̃ ɑ̃n- ɑ̃ɡlɛ si vu lə vule bjɛ̃\">"
+           + "Je ne parle bien Français. Alors continuons en Anglais si vous le voulez bien.</phoneme></s></speak>",
+    type: AlexaSkill.speechOutputType.SSML
+  };
   response.ask(speechOutput, repromptText);
 }
 
@@ -202,7 +204,7 @@ function getFinalChatOpsResponse(message, response) {
           } else if (message.indexOf('docker ps') > -1) {
             speechOutput = "OK, I asked for the status of the application. You can now check Slack for details.";
           } else if (message.indexOf('app logs') > -1) {
-            speechOutput = "Getting the logs for you. Now go to Slack for details.";
+            speechOutput = "Getting the logs for " +  message.split(' ')[4] + " container. Now go to Slack for details.";
           } else {
             speechOutput = "OK, I posted your message to Slack";
           }
